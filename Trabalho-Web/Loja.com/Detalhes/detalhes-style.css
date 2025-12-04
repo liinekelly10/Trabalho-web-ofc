@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #ffffff, #f0f0ff);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.back-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.back-btn .material-icons {
+    font-size: 28px;
+    color: #6a00ff;
+}
+
+/* CONTAINER */
+.container {
+    padding: 30px;
+}
+
+/* CARD DE DETALHE */
+.product-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+}
+
+/* IMAGEM */
+.image-box {
+    flex: 1 1 320px;
+}
+
+.image-box img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* INFORMAÇÕES */
+.info-box {
+    flex: 1 1 360px;
+}
+
+.info-box h2 {
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #6a00ff;
+    margin: 10px 0 20px;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* LISTAS */
+.features, .benefits {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.features li, .benefits li {
+    margin: 6px 0;
+}
+
+/* BOTÃO ADD CARRINHO */
+.add-cart {
+    padding: 14px;
+    width: 100%;
+    border: none;
+    background: #6a00ff;
+    color: white;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-cart:hover {
+    background: #5200d4;
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVO */
+@media (max-width: 800px) {
+    .product-card {
+        text-align: center;
+    }
+    .info-box {
+        text-align: left;
+    }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho [5]</title>
+
+    <!-- Ícones Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="car-style.css">
+</head>
+
+<body>
+
+    <!-- Header com botão voltar -->
+    <header class="header">
+        <button class="back-btn" onclick="history.back()">
+            <span class="material-icons">arrow_back</span>
+        </button>
+        <h1>Carrinho de Compras</h1>
+    </header>
+
+    <div class="container">
+
+        <table class="cart-table">
+
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Descrição</th>
+                    <th>Qtd</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- ITEM 1 -->
+                <tr data-price="89.90">
+                    <td><img src="img/produto1.jpg" class="cart-img"></td>
+
+                    <td class="desc">
+                        Camiseta Oversized<br>
+                        <span class="small">Cor: Preto – Tam: M</span>
+                    </td>
+
+                    <td class="qtd">
+                        <button class="btn-qtd decrease">–</button>
+                        <input type="number" value="1" min="1" class="input-qtd" readonly>
+                        <button class="btn-qtd increase">+</button>
+                    </td>
+
+                    <td class="item-total">R$ 89,90</td>
+                </tr>
+
+                <!-- ITEM 2 -->
+                <tr data-price="149.90">
+                    <td><img src="img/produto2.jpg" class="cart-img"></td>
+
+                    <td class="desc">
+                        Calça Cargo<br>
+                        <span class="small">Cor: Verde – Tam: G</span>
+                    </td>
+
+                    <td class="qtd">
+                        <button class="btn-qtd decrease">–</button>
+                        <input type="number" value="1" min="1" class="input-qtd" readonly>
+                        <button class="btn-qtd increase">+</button>
+                    </td>
+
+                    <td class="item-total">R$ 149,90</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <button class="finish-btn">Finalizar Compra</button>
+
+    </div>
+
+    <!-- ARQUIVO JS EXTERNO -->
+    <script src="car.js"></script>
+
+</body>
+</html>
