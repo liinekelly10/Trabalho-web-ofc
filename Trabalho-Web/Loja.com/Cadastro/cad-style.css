@@ -209,3 +209,12 @@ body {
     background: #856df1;
     color: white;
 }
+
+.erro-input {
+  color: #ff0033;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+  font-weight: 500;
+}
+

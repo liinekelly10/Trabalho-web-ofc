@@ -75,10 +75,49 @@ h2 {
     box-shadow: 0 14px 40px rgba(0,0,0,0.15);
 }
 
-.set-image {
+.set-image1 {
     width: 100%;
     height: 140px;
-    background: linear-gradient(135deg, #6a00ff, #9d4dff);
+    background: linear-gradient(135deg, #3bdd1a, #504dff);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.set-image2 {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #e992ec, #3fb4c4);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.set-image3 {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #000000, #851d1d);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.set-image4 {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #9e892e, #d5d5db);
     color: white;
     border-radius: 12px;
     display: flex;
@@ -139,7 +178,6 @@ h2 {
     position: relative;
 }
 
-/* CORES DOS RIBBONS */
 .ribbon-1 { background: #6a00ff; }
 .ribbon-2 { background: #9d4dff; }
 .ribbon-3 { background: #ff00a8; }
@@ -194,113 +232,7 @@ h2 {
 /* ========================= */
 /*     NAVBAR / TOP BAR     */
 /* ========================= */
-.top-bar {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #6a00ff;
-    padding: 12px 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
 
-.page-title {
-    flex: 1;
-    text-align: auto;
-    color: #fff;
-    font-size: 20px;
-    margin: 0;
-    pointer-events: none;
-}
-
-.nav-btn {
-    text-decoration: none;
-    background: #5500d4;
-    padding: 8px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-btn .material-icons {
-    color: #fff;
-    font-size: 24px;
-}
-
-.right-icons {
-    margin-right: 60px;
-    display: flex;
-    gap: 10px;
-}
-
-/* ========================= */
-/*  AJUSTES RESPONSIVOS NAVBAR */
-/* ========================= */
-
-/* Evita qualquer rolagem horizontal */
-body, html {
-    overflow-x: hidden;
-}
-
-/* Ajuste geral da navbar */
-.top-bar {
-    padding: 10px 12px;
-    gap: 8px;
-}
-
-/* Ícones menores */
-.nav-btn {
-    width: 40px;
-    height: 40px;
-    padding: 6px;
-}
-
-.nav-btn .material-icons {
-    font-size: 22px;
-}
-
-/* Título não pode empurrar os ícones */
-.page-title {
-    font-size: 22px;
-    padding: 0 5px;
-    white-space: nowrap;
-}
-
-/* Ajuste da área dos ícones da direita */
-.right-icons {
-    display: flex;
-    gap: 8px;
-}
-
-/* ----------- RESPONSIVO PARA MOBILE ----------- */
-@media (max-width: 430px) {
-
-    .top-bar {
-        padding: 8px 10px;
-    }
-
-    .page-title {
-        font-size: 16px;
-    }
-
-    .nav-btn {
-        width: 36px;
-        height: 36px;
-        padding: 5px;
-    }
-
-    .nav-btn .material-icons {
-        font-size: 20px;
-    }
-}
-
-/* ========================= */
-/*     NAVBAR / TOP BAR     */
-/* ========================= */
 .top-bar {
     width: 100%;
     display: flex;
@@ -394,8 +326,6 @@ body, html {
         font-size: 20px;
     }
 }
-
-
 
 /* =============================== */
 /*  ESTILO EXCLUSIVO PARA TOP 5    */
@@ -418,15 +348,26 @@ body, html {
     position: relative;
 }
 
+/* ------------------------------ */
+/*    AJUSTE DE IMAGEM PERFEITO   */
+/* ------------------------------ */
+
 .card-top5 .image-left {
     width: 120px;
-    height: 120px;
+    height: 150px;      /* altura ideal para capas */
     background: #e8e8e8;
+    border-radius: 12px;
+    overflow: hidden;    /* PARA CORTAR EXCESSO */
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.card-top5 .image-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* MANTÉM PROPORÇÃO PERFEITA */
     border-radius: 12px;
-    font-weight: bold;
 }
 
 .card-top5 .info-right {
@@ -470,8 +411,6 @@ body, html {
     right: -5px;
 }
 
-
-
 /* ---------- RESPONSIVO ---------- */
 @media (max-width: 500px) {
     .card-top5 {
@@ -481,10 +420,10 @@ body, html {
 
     .card-top5 .image-left {
         width: 100%;
+        height: 200px;
     }
 
     .card-top5 .info-right {
         width: 100%;
     }
 }
-

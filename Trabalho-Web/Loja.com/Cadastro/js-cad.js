@@ -1,99 +1,191 @@
-// minimal-next.js
-$(function(){
-  $(".next").off("click").on("click", function(){
-    var current_fs = $(this).closest("fieldset");
-    var next_fs = current_fs.next("fieldset");
-    console.log("advancing from", current_fs.index(), "to", next_fs.index());
+// ===============================
+// FUNÇÕES DE VALIDAÇÃO
+// ===============================
 
-    if(next_fs.length){
-      current_fs.hide();
-      next_fs.show();
-      // atualiza progressbar
-      $("#progressbar li").removeClass("active");
-      $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-    } else {
-      console.log("no next fieldset found");
-    }
+// Exibir erro abaixo do input
+function mostrarErro(input, mensagem) {
+  removerErro(input);
+  const span = document.createElement("span");
+  span.classList.add("erro-input");
+  span.textContent = mensagem;
+  input.insertAdjacentElement("afterend", span);
+}
+
+// Remover erro ao corrigir
+function removerErro(input) {
+  if (input.nextElementSibling && input.nextElementSibling.classList.contains("erro-input")) {
+    input.nextElementSibling.remove();
+  }
+}
+
+// Validar email
+function validarEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+// Validar CPF real
+function validarCPF(cpf) {
+  cpf = cpf.replace(/\D/g, "");
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+  let soma = 0, resto;
+
+  for (let i = 1; i <= 9; i++)
+    soma += parseInt(cpf[i - 1]) * (11 - i);
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf[9])) return false;
+
+  soma = 0;
+  for (let i = 1; i <= 10; i++)
+    soma += parseInt(cpf[i - 1]) * (12 - i);
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+
+  return resto === parseInt(cpf[10]);
+}
+
+// Validar telefone
+function validarTelefone(tel) {
+  tel = tel.replace(/\D/g, "");
+  return tel.length === 11;
+}
+
+// Validar CEP
+function validarCEP(cep) {
+  cep = cep.replace(/\D/g, "");
+  return cep.length === 8;
+}
+
+
+// ===============================
+// CONTROLE DO FORM STEPS
+// ===============================
+$(function () {
+
+  // ---- BOTÃO NEXT COM VALIDAÇÕES ---- //
+  $(".next").off("click").on("click", function () {
+
+    let current_fs = $(this).closest("fieldset");
+    let valid = true;
+
+    // Todos inputs deste step
+    current_fs.find("input, select, textarea").each(function () {
+      removerErro(this);
+
+      if (this.value.trim() === "") {
+        mostrarErro(this, "Este campo é obrigatório.");
+        valid = false;
+      }
+
+      // Email
+      if (this.name === "email" && this.value !== "" && !validarEmail(this.value)) {
+        mostrarErro(this, "Email inválido.");
+        valid = false;
+      }
+
+      // Senha e confirmar
+      if (this.name === "cpass") {
+        let senha = current_fs.find("input[name='pass']").val();
+        if (this.value !== senha) {
+          mostrarErro(this, "As senhas não coincidem.");
+          valid = false;
+        }
+      }
+
+      // CPF
+      if (this.name === "cpf" && this.value !== "" && !validarCPF(this.value)) {
+        mostrarErro(this, "CPF inválido.");
+        valid = false;
+      }
+
+      // Telefone
+      if (this.name === "phone" && this.value !== "" && !validarTelefone(this.value)) {
+        mostrarErro(this, "Telefone inválido.");
+        valid = false;
+      }
+
+      // CEP
+      if (this.name === "cep" && this.value !== "" && !validarCEP(this.value)) {
+        mostrarErro(this, "CEP inválido.");
+        valid = false;
+      }
+
+    });
+
+    if (!valid) return; // impede avanço
+
+    // ---- AVANÇAR SE TUDO OK ---- //
+    let next_fs = current_fs.next("fieldset");
+    current_fs.hide();
+    next_fs.show();
+
+    $("#progressbar li").removeClass("active");
+    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
   });
 
-  $(".previous").off("click").on("click", function(){
+
+  // ---- BOTÃO PREVIOUS ---- //
+  $(".previous").off("click").on("click", function () {
     var current_fs = $(this).closest("fieldset");
     var prev_fs = current_fs.prev("fieldset");
-    console.log("going back from", current_fs.index(), "to", prev_fs.index());
 
-    if(prev_fs.length){
-      current_fs.hide();
-      prev_fs.show();
-      $("#progressbar li").removeClass("active");
-      $("#progressbar li").eq($("fieldset").index(prev_fs)).addClass("active");
-    } else {
-      console.log("no previous fieldset found");
-    }
+    current_fs.hide();
+    prev_fs.show();
+
+    $("#progressbar li").removeClass("active");
+    $("#progressbar li").eq($("fieldset").index(prev_fs)).addClass("active");
   });
 
+
+  // Máscaras de CPF, CEP e Telefone (mantidas)
   document.getElementById("cpf").addEventListener("input", function (e) {
-    let value = e.target.value;
-
-    // Remove tudo que não seja número
-    value = value.replace(/\D/g, "");
-
-    // Aplica a máscara
+    let value = e.target.value.replace(/\D/g, "");
     value = value.replace(/(\d{3})(\d)/, "$1.$2");
     value = value.replace(/(\d{3})(\d)/, "$1.$2");
     value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
     e.target.value = value;
-
   });
 
 });
 
+
+// ===============================
+// MÁSCARAS (Telefone e CEP)
+// ===============================
 function mascaraTelefone(campo) {
-    let v = campo.value.replace(/\D/g, ""); // remove tudo que não é número
+  let v = campo.value.replace(/\D/g, "");
+  if (v.length > 11) v = v.slice(0, 11);
 
-    // Permite backspace sem travar
-    if (campo.value.length < campo.oldValueLength) {
-        campo.oldValueLength = campo.value.length;
-        return;
-    }
+  let formatted = "";
+  if (v.length > 0) formatted = "(" + v.substring(0, 2);
+  if (v.length >= 3) formatted += ")" + v.substring(2, 7);
+  if (v.length >= 8) formatted += "-" + v.substring(7, 11);
 
-    if (v.length > 11) v = v.slice(0, 11);
-
-    let formatted = "";
-
-    if (v.length > 0) {
-        formatted = "(" + v.substring(0, 2);
-    }
-    if (v.length >= 3) {
-        formatted += ")" + v.substring(2, 7);
-    }
-    if (v.length >= 8) {
-        formatted += "-" + v.substring(7, 11);
-    }
-
-    campo.value = formatted;
-    campo.oldValueLength = campo.value.length;
+  campo.value = formatted;
 }
 
 function mascaraCEP(campo) {
-    let v = campo.value.replace(/\D/g, ""); // só números
+  let v = campo.value.replace(/\D/g, "");
+  if (v.length > 8) v = v.slice(0, 8);
 
-    // Permite apagar sem travar
-    if (campo.value.length < campo.oldValueLength) {
-        campo.oldValueLength = campo.value.length;
-        return;
-    }
-
-    if (v.length > 8) v = v.slice(0, 8);
-
-    let formatted = "";
-
-    if (v.length > 5) {
-        formatted = v.slice(0,5) + "-" + v.slice(5);
-    } else {
-        formatted = v;
-    }
-
-    campo.value = formatted;
-    campo.oldValueLength = campo.value.length;
+  campo.value = v.length > 5 ? v.slice(0, 5) + "-" + v.slice(5) : v;
 }
+
+// ===============================
+// VOLTAR DO PRIMEIRO PASSO → HOME
+// ===============================
+$(document).on("click", ".btn-voltar-home", function () {
+    window.location.href = "../Home/home.html"; 
+});
+
+// ===============================
+// REDIRECIONAR APÓS ENVIO DO FORMULÁRIO
+// ===============================
+$("#msform").on("submit", function (e) {
+    e.preventDefault();
+    window.location.href = "../Home/home.html";
+});
+
+
