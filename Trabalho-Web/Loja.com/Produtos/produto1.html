@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categoria - Camisas</title>
+    <title>Livros Nacionais</title>
 
     <link rel="stylesheet" href="prod1-style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,16 +12,29 @@
 
 <header class="top-bar">
 
-    <button class="back-btn" onclick="location.href='../Home/home.html'">
-        <span class="material-icons">arrow_back</span>
-    </button>
+    <!-- Botão HOME -->
+    <a href="../Home/home.html" class="nav-btn">
+        <span class="material-icons">home</span>
+    </a>
 
-    <h1>Categoria: Camisas</h1>
+    <!-- Título centralizado -->
+    <h1 class="page-title">Livros Nacionais</h1>
 
-    <div class="icons">
-        <a href="cadastro.html" class="icon">👤</a>
-        <a href="carrinho.html" class="icon">🛒</a>
+    <!-- Ícones da direita -->
+    <div class="right-icons">
+        <a href="pesquisa.html" class="nav-btn">
+            <span class="material-icons">search</span>
+        </a>
+
+        <a href="../Cadastro/cadastro.html" class="nav-btn">
+            <span class="material-icons">person_add</span>
+        </a>
+
+        <a href="../Carrinho/carrinho.html" class="nav-btn">
+            <span class="material-icons">shopping_cart</span>
+        </a>
     </div>
+
 
 </header>
 
@@ -31,36 +44,36 @@
     <!-- CARD 1 -->
     <div class="card">
         <div class="ribbon-wrapper"><div class="ribbon">Novo</div></div>
-        <img src="img/produto1.jpg" alt="Produto 1">
-        <h3>Camiseta Clássica</h3>
-        <p>R$ 59,90</p>
+        <img src="../assets/images/bomdia.jpg" alt="Produto 1">
+        <h3>Bom dia, Verônica</h3>
+        <p>R$ 89,90</p>
         <button onclick="location.href='detalhes.html'">Ver detalhes</button>
     </div>
 
     <!-- CARD 2 -->
     <div class="card">
         <div class="ribbon-wrapper"><div class="ribbon">Promoção</div></div>
-        <img src="img/produto2.jpg" alt="Produto 2">
-        <h3>Camiseta Oversized</h3>
-        <p>R$ 79,90</p>
+        <img src="../assets/images/hilda.jpg" alt="Produto 2">
+        <h3>Hilda Furacão</h3>
+        <p>R$ 59,90</p>
         <button onclick="location.href='detalhes.html'">Ver detalhes</button>
     </div>
 
     <!-- CARD 3 -->
     <div class="card">
         <div class="ribbon-wrapper"><div class="ribbon">Top 1</div></div>
-        <img src="img/produto3.jpg" alt="Produto 3">
-        <h3>Camiseta Street</h3>
-        <p>R$ 89,90</p>
+        <img src="../assets/images/laranja.jpg" alt="Produto 3">
+        <h3>O meu pé de laranja lima</h3>
+        <p>R$ 39,90</p>
         <button onclick="location.href='detalhes.html'">Ver detalhes</button>
     </div>
 
     <!-- CARD 4 -->
     <div class="card">
         <div class="ribbon-wrapper"><div class="ribbon">Novo</div></div>
-        <img src="img/produto4.jpg" alt="Produto 4">
-        <h3>Camiseta Esportiva</h3>
-        <p>R$ 69,90</p>
+        <img src="../assets/images/santo.jpg" alt="Produto 4">
+        <h3>A cabeça do santo</h3>
+        <p>R$ 39,90</p>
         <button onclick="location.href='detalhes.html'">Ver detalhes</button>
     </div>
 
