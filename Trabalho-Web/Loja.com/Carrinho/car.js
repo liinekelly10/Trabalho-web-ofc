@@ -92,3 +92,37 @@ function updateTotals() {
 function formatBRL(number) {
   return "R$ " + Number(number).toFixed(2).replace(".", ",");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadCartFromStorage();
+    updateTotals();
+});
+
+function loadCartFromStorage() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = ""; // garantir vazio
+
+    cart.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.dataset.price = item.price;
+
+        tr.innerHTML = `
+            <td><img src="${item.image}" class="cart-img"></td>
+
+            <td class="desc">
+                ${item.name}<br>
+            </td>
+
+            <td class="qtd">
+                <button class="btn-qtd decrease">–</button>
+                <input type="number" value="${item.qty}" min="1" class="input-qtd" readonly>
+                <button class="btn-qtd increase">+</button>
+            </td>
+
+            <td class="item-total">R$ ${(item.price * item.qty).toFixed(2).replace(".", ",")}</td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+}
