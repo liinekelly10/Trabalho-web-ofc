@@ -9,3 +9,31 @@ togglePassword.addEventListener("click", () => {
     togglePassword.classList.toggle("fa-eye");
     togglePassword.classList.toggle("fa-eye-slash");
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btnLogin = document.getElementById("btnLogin");
+
+  if (btnLogin) {
+    btnLogin.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("emailLogin").value;
+      const senha = document.getElementById("senhaLogin").value;
+
+      const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"));
+
+      if (!usuarioSalvo) {
+        alert("Nenhum usuário cadastrado!");
+        return;
+      }
+
+      if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
+        alert("Login realizado com sucesso!");
+        window.location.href = "../Home/home.html";
+      } else {
+        alert("E-mail ou senha incorretos!");
+      }
+    });
+  }
+});
+

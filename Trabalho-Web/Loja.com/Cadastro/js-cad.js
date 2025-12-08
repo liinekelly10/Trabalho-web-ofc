@@ -210,3 +210,32 @@ $("#msform").on("submit", function () {
   alert("Cadastro realizado com sucesso!");
 });
 
+// ===============================
+// SALVAR USUÁRIO NO LOCALSTORAGE
+// ===============================
+$("#msform").on("submit", function (event) {
+    
+    // pega todos os valores do form
+    const usuario = {
+        username: $("input[name='user']").val(),
+        email: $("input[name='email']").val(),
+        senha: $("input[name='pass']").val(),
+        estado: $("#UF").val(),
+        cidade: $("input[name='cidade']").val(),
+        cep: $("input[name='cep']").val(),
+        endereco: $("textarea[name='endereco']").val(),
+        cpf: $("input[name='cpf']").val(),
+        nomeCompleto: $("input[name='Nome_C']").val(),
+        telefone: $("input[name='phone']").val()
+    };
+
+    // salva no LocalStorage
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    // o seu alert atual
+    alert("Cadastro realizado com sucesso!");
+
+    // deixa o redirecionamento do HTML funcionar normalmente
+});
+
+
