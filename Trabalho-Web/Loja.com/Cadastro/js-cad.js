@@ -2,19 +2,19 @@
 // FUNÇÕES DE VALIDAÇÃO
 // ===============================
 
-// Exibir erro abaixo do input
+// Exibir erro ACIMA do input
 function mostrarErro(input, mensagem) {
   removerErro(input);
   const span = document.createElement("span");
   span.classList.add("erro-input");
   span.textContent = mensagem;
-  input.insertAdjacentElement("afterend", span);
+  input.insertAdjacentElement("beforebegin", span);
 }
 
 // Remover erro ao corrigir
 function removerErro(input) {
-  if (input.nextElementSibling && input.nextElementSibling.classList.contains("erro-input")) {
-    input.nextElementSibling.remove();
+  if (input.previousElementSibling && input.previousElementSibling.classList.contains("erro-input")) {
+    input.previousElementSibling.remove();
   }
 }
 
@@ -22,6 +22,12 @@ function removerErro(input) {
 function validarEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
+}
+
+// Validar senha (maiúscula, minúscula, número, caractere especial)
+function validarSenha(senha) {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+  return regex.test(senha);
 }
 
 // Validar CPF real
@@ -58,7 +64,6 @@ function validarCEP(cep) {
   return cep.length === 8;
 }
 
-
 // ===============================
 // CONTROLE DO FORM STEPS
 // ===============================
@@ -74,6 +79,7 @@ $(function () {
     current_fs.find("input, select, textarea").each(function () {
       removerErro(this);
 
+      // Campo vazio
       if (this.value.trim() === "") {
         mostrarErro(this, "Este campo é obrigatório.");
         valid = false;
@@ -85,7 +91,17 @@ $(function () {
         valid = false;
       }
 
-      // Senha e confirmar
+      // Senha (regras)
+      if (this.name === "pass") {
+        if (!validarSenha(this.value)) {
+          mostrarErro(this,
+            "A senha deve ter: letra maiúscula, minúscula, número e caractere especial."
+          );
+          valid = false;
+        }
+      }
+
+      // Confirmar senha
       if (this.name === "cpass") {
         let senha = current_fs.find("input[name='pass']").val();
         if (this.value !== senha) {
@@ -139,7 +155,7 @@ $(function () {
   });
 
 
-  // Máscaras de CPF, CEP e Telefone (mantidas)
+  // Máscara CPF
   document.getElementById("cpf").addEventListener("input", function (e) {
     let value = e.target.value.replace(/\D/g, "");
     value = value.replace(/(\d{3})(\d)/, "$1.$2");
@@ -149,7 +165,6 @@ $(function () {
   });
 
 });
-
 
 // ===============================
 // MÁSCARAS (Telefone e CEP)
@@ -177,15 +192,21 @@ function mascaraCEP(campo) {
 // VOLTAR DO PRIMEIRO PASSO → HOME
 // ===============================
 $(document).on("click", ".btn-voltar-home", function () {
-    window.location.href = "../Home/home.html"; 
+  window.location.href = "../Home/home.html";
 });
 
 // ===============================
-// REDIRECIONAR APÓS ENVIO DO FORMULÁRIO
+// ENVIO DO FORMULÁRIO (SEM REDIRECIONAR)
 // ===============================
-$("#msform").on("submit", function (e) {
-    e.preventDefault();
-    window.location.href = "../Home/home.html";
+$("#msform").on("submit", function () {
+  // NÃO usa preventDefault!
+  // A página recarrega e os dados aparecem via GET
 });
 
+// ===============================
+// MENSAGEM DE SUCESSO AO ENVIAR
+// ===============================
+$("#msform").on("submit", function () {
+  alert("Cadastro realizado com sucesso!");
+});
 
