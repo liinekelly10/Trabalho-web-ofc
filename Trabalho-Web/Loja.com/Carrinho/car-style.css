@@ -127,6 +127,21 @@ body {
     transition: 0.3s;
 }
 
+.clear-cart-btn{
+    margin-top: 30px;
+    padding: 18px;
+    background: #a275e0;
+    color: rgb(255, 255, 255);
+    border: none;
+    width: 100%;
+    font-size: 15px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    transition: 0.3s
+}
+
 .finish-btn:hover {
     background: #5200d4;
     transform: translateY(-4px);
