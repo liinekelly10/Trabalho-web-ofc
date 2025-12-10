@@ -192,7 +192,7 @@ function mascaraCEP(campo) {
 // VOLTAR DO PRIMEIRO PASSO → HOME
 // ===============================
 $(document).on("click", ".btn-voltar-home", function () {
-  window.location.href = "../Home/home.html";
+  window.location.href = "../index.html";
 });
 
 // ===============================

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
         alert("Login realizado com sucesso!");
-        window.location.href = "../Home/home.html";
+        window.location.href = "../index.html";
       } else {
         alert("E-mail ou senha incorretos!");
       }
